@@ -93,7 +93,7 @@ make install DESTDIR=%{buildroot}
 
 %changelog
 * Wed Sep 26 2012 Richard Shaw <hobbes1069@gmail.com> - 5.1.2.2-4.svn54
-- Rebuild for boost-1.50.
+- Rebuild due to package not being signed in F-18 repo.
 
 * Thu Mar 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 5.1.2.2-3.svn54
 - Rebuilt for c++ ABI breakage
