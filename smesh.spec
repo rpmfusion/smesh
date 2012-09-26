@@ -1,6 +1,6 @@
 Name:           smesh
 Version:        5.1.2.2
-Release:        3.svn54%{?dist}
+Release:        4.svn54%{?dist}
 Summary:        OpenCascade based MESH framework
 
 # This library is LGPLv2+ but links against the non-free library OCE.
@@ -92,6 +92,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Wed Sep 26 2012 Richard Shaw <hobbes1069@gmail.com> - 5.1.2.2-4.svn54
+- Rebuild due to package not being signed in F-18 repo.
+
 * Thu Mar 08 2012 Nicolas Chauvet <kwizart@gmail.com> - 5.1.2.2-3.svn54
 - Rebuilt for c++ ABI breakage
 
