@@ -1,3 +1,8 @@
+# Use newer cmake on EL builds
+%if 0%{?rhel}
+%global cmake %cmake28
+%endif
+
 Name:           smesh
 Version:        5.1.2.2
 Release:        3.svn54%{?dist}
@@ -16,7 +21,12 @@ Source0:        smesh-5.1.2.2-svn54.tar.gz
 Patch0:         smesh.patch
 Patch1:         smesh-cmake_fixes.patch
 
-BuildRequires:  cmake doxygen
+%if 0%{?rhel}
+BuildRequires:  cmake28
+%else
+BuildRequires:  cmake
+%endif
+BuildRequires:  doxygen graphviz
 BuildRequires:  OCE-devel
 BuildRequires:  boost-devel
 BuildRequires:  gcc-gfortran
