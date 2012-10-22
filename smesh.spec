@@ -1,6 +1,11 @@
+# Use a newer version of cmake on EL.
+%if 0%{?rhel}
+%global cmake %cmake28
+%endif
+
 Name:           smesh
 Version:        5.1.2.2
-Release:        4.svn54%{?dist}
+Release:        5.svn54%{?dist}
 Summary:        OpenCascade based MESH framework
 
 # This library is LGPLv2+ but links against the non-free library OCE.
@@ -15,17 +20,27 @@ Source0:        smesh-5.1.2.2-svn54.tar.gz
 # on 12/21/11.
 Patch0:         smesh.patch
 Patch1:         smesh-cmake_fixes.patch
+Patch2:         smesh-5.1.2.2-rm_f2c.patch
 
-BuildRequires:  cmake doxygen
+%if 0%{?rhel}
+BuildRequires:  cmake28
+%else
+BuildRequires:  cmake
+%endif
+BuildRequires:  doxygen graphviz
 BuildRequires:  OCE-devel
 BuildRequires:  boost-devel
 BuildRequires:  gcc-gfortran
-BuildRequires:  f2c
+# Do we need this?
+#BuildRequires:  f2c f2c-devel
 BuildRequires:  dos2unix
 
 
 %description
 A complete OpenCascade based MESH framework.
+
+NOTE: Fortran support (f2c) has been disabled. If it is needed please open a
+bug against the smesh component  at: http://bugzilla.rpmfusion.org
 
 
 %package doc
@@ -49,6 +64,7 @@ Development files and headers for %{name}.
 %setup -q -c %{name}-%{version}
 %patch0 -p1
 %patch1 -p1 -b .cmakefix
+%patch2 -p1 -b .f2c
 
 dos2unix -k LICENCE.lgpl.txt
 
@@ -92,6 +108,10 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Mon Oct 22 2012 Richard Shaw <hobbes1069@gmail.com> - 5.1.2.2-5.svn54
+- Remove build requirement for fortran (f2c).
+- Initial packaging for EPEL 6.
+
 * Wed Sep 26 2012 Richard Shaw <hobbes1069@gmail.com> - 5.1.2.2-4.svn54
 - Rebuild due to package not being signed in F-18 repo.
 
