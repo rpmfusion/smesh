@@ -3,9 +3,11 @@
 %global cmake %cmake28
 %endif
 
+%global svnrev 55
+
 Name:           smesh
 Version:        5.1.2.2
-Release:        5.svn54%{?dist}
+Release:        6.svn%{svnrev}%{?dist}
 Summary:        OpenCascade based MESH framework
 
 # This library is LGPLv2+ but links against the non-free library OCE.
@@ -14,13 +16,14 @@ URL:            https://sourceforge.net/projects/salomesmesh
 
 # Source is svn checkout since the last release is too old:
 # https://salomesmesh.svn.sourceforge.net/svnroot/salomesmesh/trunk
-Source0:        smesh-5.1.2.2-svn54.tar.gz
+Source0:        %{name}-%{version}.svn%{svnrev}.tar.gz
 
 # Patch emailed upstream to Fotios Sioutis <sfotis@gmail.com>
 # on 12/21/11.
 Patch0:         smesh.patch
 Patch1:         smesh-cmake_fixes.patch
 Patch2:         smesh-5.1.2.2-rm_f2c.patch
+Patch3:         smesh-5.1.2.2-pi_to_m_pi.patch
 
 %if 0%{?rhel}
 BuildRequires:  cmake28
@@ -61,10 +64,11 @@ Development files and headers for %{name}.
 
 
 %prep
-%setup -q -c %{name}-%{version}
+%setup -q -n %{name}-%{version}.svn%{svnrev}
 %patch0 -p1
 %patch1 -p1 -b .cmakefix
 %patch2 -p1 -b .f2c
+%patch3 -p1 -b .pi
 
 dos2unix -k LICENCE.lgpl.txt
 
@@ -108,6 +112,9 @@ make install DESTDIR=%{buildroot}
 
 
 %changelog
+* Fri Feb 15 2013 Richard Shaw <hobbes1069@gmail.com> - 5.1.2.2-1.svn55
+- Update for compatibility with new OCE.
+
 * Mon Oct 22 2012 Richard Shaw <hobbes1069@gmail.com> - 5.1.2.2-5.svn54
 - Remove build requirement for fortran (f2c).
 - Initial packaging for EPEL 6.

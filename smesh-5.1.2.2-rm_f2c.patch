@@ -1,0 +1,12 @@
+diff -Naur smesh-5.1.2.2.orig/CMakeLists.txt smesh-5.1.2.2/CMakeLists.txt
+--- smesh-5.1.2.2.orig/CMakeLists.txt	2012-07-05 10:03:58.241643809 -0500
++++ smesh-5.1.2.2/CMakeLists.txt	2012-07-05 10:04:37.340404971 -0500
+@@ -160,7 +160,7 @@
+ INCLUDE_DIRECTORIES(src/StdMeshers)
+ 
+ ADD_LIBRARY(StdMeshers SHARED ${StdMeshers_source_files})
+-TARGET_LINK_LIBRARIES(StdMeshers SMESH TKernel TKMath TKAdvTools f2c)
++TARGET_LINK_LIBRARIES(StdMeshers SMESH TKernel TKMath TKAdvTools)
+ 
+ ###########
+ # INSTALL #
