@@ -3,9 +3,11 @@
 %global cmake %cmake28
 %endif
 
+%global svnrev 55
+
 Name:           smesh
 Version:        5.1.2.2
-Release:        6.svn55%{?dist}
+Release:        6.svn%{svnrev}%{?dist}
 Summary:        OpenCascade based MESH framework
 
 # This library is LGPLv2+ but links against the non-free library OCE.
@@ -14,7 +16,7 @@ URL:            https://sourceforge.net/projects/salomesmesh
 
 # Source is svn checkout since the last release is too old:
 # https://salomesmesh.svn.sourceforge.net/svnroot/salomesmesh/trunk
-Source0:        smesh-5.1.2.2-svn54.tar.gz
+Source0:        %{name}-%{version}.svn%{svnrev}.tar.gz
 
 # Patch emailed upstream to Fotios Sioutis <sfotis@gmail.com>
 # on 12/21/11.
@@ -62,7 +64,7 @@ Development files and headers for %{name}.
 
 
 %prep
-%setup -q -c %{name}-%{version}
+%setup -q -n %{name}-%{version}.svn%{svnrev}
 %patch0 -p1
 %patch1 -p1 -b .cmakefix
 %patch2 -p1 -b .f2c
