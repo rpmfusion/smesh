@@ -1,0 +1,29 @@
+diff -Naur smesh-5.1.2.2.svn55.orig/src/StdMeshers/StdMeshers_RadialPrism_3D.cpp smesh-5.1.2.2.svn55/src/StdMeshers/StdMeshers_RadialPrism_3D.cpp
+--- smesh-5.1.2.2.svn55.orig/src/StdMeshers/StdMeshers_RadialPrism_3D.cpp	2009-12-16 09:01:21.000000000 -0600
++++ smesh-5.1.2.2.svn55/src/StdMeshers/StdMeshers_RadialPrism_3D.cpp	2013-09-22 21:30:43.995137618 -0500
+@@ -46,6 +46,7 @@
+ #include <BRepBuilderAPI_MakeEdge.hxx>
+ #include <BRepTools.hxx>
+ #include <BRep_Tool.hxx>
++#include <BRepClass3d.hxx>
+ #include <TopExp_Explorer.hxx>
+ #include <TopoDS.hxx>
+ #include <TopoDS_Shell.hxx>
+@@ -161,7 +163,7 @@
+ 
+   // get 2 shells
+   TopoDS_Solid solid = TopoDS::Solid( aShape );
+-  TopoDS_Shell outerShell = BRepTools::OuterShell( solid );
++  TopoDS_Shell outerShell = BRepClass3d::OuterShell( solid );
+   TopoDS_Shape innerShell;
+   int nbShells = 0;
+   for ( TopoDS_Iterator It (solid); It.More(); It.Next(), ++nbShells )
+@@ -401,7 +403,7 @@
+ {
+   // get 2 shells
+   TopoDS_Solid solid = TopoDS::Solid( aShape );
+-  TopoDS_Shell outerShell = BRepTools::OuterShell( solid );
++  TopoDS_Shell outerShell = BRepClass3d::OuterShell( solid );
+   TopoDS_Shape innerShell;
+   int nbShells = 0;
+   for ( TopoDS_Iterator It (solid); It.More(); It.Next(), ++nbShells )
